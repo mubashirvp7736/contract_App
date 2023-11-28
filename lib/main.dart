@@ -1,6 +1,7 @@
-import 'package:agile/main_screen.dart';
+
+import 'package:contracterApp/splashScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:agile/homescreen.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -8,11 +9,11 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Screen(),
+      home: Splash()
     );
-  }
-}
+    }
+    }
