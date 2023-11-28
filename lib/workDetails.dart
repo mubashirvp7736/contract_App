@@ -1,6 +1,9 @@
 
+import 'dart:io';
+
 import 'package:contracterApp/homePage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class DetailsAdd extends StatefulWidget {
   const DetailsAdd({super.key});
@@ -10,21 +13,29 @@ class DetailsAdd extends StatefulWidget {
 }
 
 class _DetailsAddState extends State<DetailsAdd> {
-
+  final imagepicker=ImagePicker();
   String selectedjob='';
+  File? picked;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
        backgroundColor: Colors.blueGrey,
        
       body: Container(
-        margin: EdgeInsets.only(top: 120),
+        margin: EdgeInsets.only(top: 10),
         child: Column(
           children: [
             Container(
               padding: EdgeInsets.all(20),
               child: Column(
                 children: [
+                   GestureDetector(
+                    onTap: () => getimage(ImageSource.camera),
+                    child: CircleAvatar(backgroundColor: Colors.black,child:
+                    picked== null?Icon(Icons.add_a_photo):ClipOval(child: Image.file(picked!,fit: BoxFit.cover,   height: 120,
+                              width: 120,),),
+                    radius: 60,),
+                  ),SizedBox(height: 10),
                   TextFormField(
               maxLength:10 ,
               decoration: InputDecoration(
@@ -85,4 +96,13 @@ class _DetailsAddState extends State<DetailsAdd> {
       
     );
   }
+     getimage(ImageSource source) async {
+    var img = await imagepicker.pickImage(source: source);
+    setState(() {
+      picked = File(img!.path);
+      
+    });
+  
+}
+
   }

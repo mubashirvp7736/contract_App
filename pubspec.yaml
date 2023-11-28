@@ -33,6 +33,7 @@ dependencies:
   curved_navigation_bar: ^1.0.3
   flutter:
     sdk: flutter
+  image_picker: ^1.0.4
   webview_flutter: ^4.4.2
 
 dev_dependencies:
