@@ -21,75 +21,81 @@ class _DetailsAddState extends State<DetailsAdd> {
     return Scaffold(
        backgroundColor: Colors.blueGrey,
        
-      body: Container(
-        margin: EdgeInsets.only(top: 10),
-        child: Column(
-          children: [
-            Container(
-              padding: EdgeInsets.all(20),
-              child: Column(
-                children: [
-                   GestureDetector(
-                    onTap: () => getimage(ImageSource.camera),
-                    child: CircleAvatar(backgroundColor: Colors.black,child:
-                    picked== null?Icon(Icons.add_a_photo):ClipOval(child: Image.file(picked!,fit: BoxFit.cover,   height: 120,
-                              width: 120,),),
-                    radius: 60,),
-                  ),SizedBox(height: 10),
-                  TextFormField(
-              maxLength:10 ,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.horizontal(left:Radius.circular(120),right: Radius.circular(120),)
-                ),hintText: 'WorkersName'
-              ),
-             ),
-             TextFormField(
-              maxLength:10 ,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.horizontal(left:Radius.circular(120),right: Radius.circular(120),)
-                ),hintText: 'mobileNumber'
-              ),
-             ),
-             TextFormField(
-              
-              maxLength:10 ,
-              decoration: InputDecoration(
-              
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.horizontal(left:Radius.circular(120),right: Radius.circular(120),)
-                ),hintText: 'Age'
-              ),
-              
-             ),
-             DropdownButtonFormField(decoration: InputDecoration(border: OutlineInputBorder(borderRadius: BorderRadius.horizontal(left: Radius.circular(120),right: Radius.circular(120)),),hintText: 'job Categories'),
-              items: <String>['building work', 'cement work', 'all rounder', 'material work']
-                  .map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-             onChanged: (value) => 
-              setState(() {
-                selectedjob;
-              })
-             ,),SizedBox(height: 18,),
-          
-              ElevatedButton(onPressed: (){
-                  
+      body: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.only(top: 10),
+          child: Column(
+            children: [
+              Container(
+                padding: EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                     GestureDetector(
+                      onTap: () => getimage(ImageSource.camera),
+                      child: CircleAvatar(backgroundColor: Colors.black,child:
+                      picked== null?Icon(Icons.add_a_photo):ClipOval(child: Image.file(picked!,fit: BoxFit.cover,   height: 120,
+                                width: 120,),),
+                      radius: 60,),
+                    ),SizedBox(height: 10),
+                    TextFormField(
+                      
+                maxLength:10 ,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.horizontal(left:Radius.circular(120),right: Radius.circular(120),)
+                  ),labelText: 'WorkersName',labelStyle: TextStyle(color: Colors.white),
+                  prefixIcon: Icon(Icons.person_2_outlined,color: Colors.white,)
+                ),
+               ),
+               TextFormField(
+                keyboardType: TextInputType.number,
+                maxLength:10 ,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.horizontal(left:Radius.circular(120),right: Radius.circular(120),)
+                  ),labelText: 'mobileNumber',labelStyle: TextStyle(color: Colors.white),
+                prefixText: '+91 ',prefixStyle: TextStyle(color: Colors.white)),
+               ),
+               TextFormField(
+                
+                keyboardType: TextInputType.number,
+                maxLength:10 ,
+                decoration: InputDecoration(
+                
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.horizontal(left:Radius.circular(120),right: Radius.circular(120),)
+                  ),labelText: 'Age',labelStyle: TextStyle(color: Colors.white),prefixIcon: Icon(Icons.calendar_month,color: Colors.white,)
+                ),
+                
+               ),
+               DropdownButtonFormField(decoration: InputDecoration(border: OutlineInputBorder(borderRadius: BorderRadius.horizontal(left: Radius.circular(120),right: Radius.circular(120)),),labelText: 'job Categories',labelStyle: TextStyle(color: Colors.white)),
+                items: <String>['building work', 'cement work', 'all rounder', 'material work']
+                    .map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+               onChanged: (value) => 
+                setState(() {
+                  selectedjob;
+                })
+               ,),SizedBox(height: 18,),
+            
+                ElevatedButton(onPressed: (){
                     
-                     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
-                    
-                   
-                   }, child: Text("SubMit",),)
-                ],
-              ),
-            )
+                      
+                       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+                      
+                     
+                     }, child: Text("SubMit",),)
+                  ],
+                ),
+              )
+               
              
-           
-          ],
+            ],
+          ),
         ),
       ),
 

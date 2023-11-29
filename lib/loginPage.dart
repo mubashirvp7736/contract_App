@@ -14,15 +14,16 @@ class _UserLoginState extends State<UserLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueGrey,
        appBar: AppBar(
         title: Text('User Login'),
         backgroundColor: Colors.indigo,
       
        ),
        body:Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(image: AssetImage("assets/loginfront.jpg"),fit: BoxFit.cover)
-        ),
+      //   decoration: BoxDecoration(
+      //     image: DecorationImage(image: AssetImage("assets/loginfront.jpg"),fit: BoxFit.cover)
+      //   ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

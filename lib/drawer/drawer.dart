@@ -5,7 +5,9 @@ class Navbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(child: Column(
+    return Drawer(
+      backgroundColor: Colors.blueGrey[200],
+      child: Column(
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 45),

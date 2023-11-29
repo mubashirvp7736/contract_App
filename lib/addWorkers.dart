@@ -14,7 +14,7 @@ class _AddWorkersState extends State<AddWorkers> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.brown[200],
+      backgroundColor: Colors.blueGrey,
        body:       
        Container(
          child: Column(
@@ -31,7 +31,7 @@ class _AddWorkersState extends State<AddWorkers> {
                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Details()));
                 },
                  child: Card(
-                  color: Colors.grey[700],
+                  color: Colors.grey[500],
                   elevation: 5,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)

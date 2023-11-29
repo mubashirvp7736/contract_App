@@ -24,7 +24,7 @@ class Details extends StatelessWidget {
                    backgroundColor: Colors.black,
                    child: Icon(
                       Icons.person_outline_rounded,
-                      color: Colors.white,
+                      color: Colors.red,
                       size: 70,)
                 ),
                 Column(

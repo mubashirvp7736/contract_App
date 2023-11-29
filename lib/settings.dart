@@ -1,17 +1,27 @@
+
 import 'package:flutter/material.dart';
 
-class SignOut extends StatefulWidget {
-  const SignOut({super.key});
+class Account extends StatelessWidget {
+  Account({Key? key}) : super(key: key);
+  final listText = [
+    'Home',
+    'Account',
+    'settings',
+    'About',
+  ];
+final screens = [
+];
+  List holcon=[
+  Icon(Icons.home),
+  Icon(Icons.person),
+  Icon(Icons.settings),
+  Icon(Icons.camera)
+  ];
 
-  @override
-  State<SignOut> createState() => _SignOutState();
-}
-
-class _SignOutState extends State<SignOut> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey[300],
+       backgroundColor: Colors.blueGrey,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -45,13 +55,41 @@ class _SignOutState extends State<SignOut> {
                           ),
                         ),
                         onPressed: () {},
-                        child: Text("Sign in / logout"),
+                        child: Text("Sign in /logout"),
                       ),
                     ),
                   ),
                 ],
               ),
-         )])));
+            ),
+            ListView.separated(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) => ListTile(
+                leading: holcon[index],
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return screens[index];
+                    },
+                  ));
+                },
+                trailing: Icon(Icons.arrow_forward_ios, size: 15),
+                title: Text(
+                  listText[index],
+                  style: TextStyle(fontSize: 14),
+                ),
+              ),
+              separatorBuilder: (context, index) => Divider(),
+              itemCount: 4,
+            ),
+            Center(
+              child: Text('Version 9.15.0'),
+            ),
+          ],
+        ),
+      ),
+    );
   }
-  }
+}
  
