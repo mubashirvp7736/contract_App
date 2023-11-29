@@ -1,4 +1,5 @@
 
+import 'package:contracterApp/details/details.dart';
 import 'package:contracterApp/edit/edit.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +28,7 @@ class _AddWorkersState extends State<AddWorkers> {
      child: ListView.builder(itemBuilder: (context, index){
                return GestureDetector(
                 onTap: () {
-               //   Navigator.push(context, MaterialPageRoute(builder: (context)=>details()));
+                 Navigator.push(context, MaterialPageRoute(builder: (context)=>Details()));
                 },
                  child: Card(
                   color: Colors.grey[700],
