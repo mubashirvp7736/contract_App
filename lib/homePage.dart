@@ -103,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       drawer: Navbar(),
       appBar: AppBar(
-        title: Text('HomePage'),
+        title: Text('HomePage',style: TextStyle(color:Color(0xFFF6EDE3) ),),
         actions: [
           IconButton(
             onPressed: () {
@@ -112,11 +112,11 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.more_vert_outlined),
           ),
         ],
-        backgroundColor: Colors.blue,
+        backgroundColor: Color.fromARGB(255, 69, 107, 59),
       ),
       bottomNavigationBar: CurvedNavigationBar(
         buttonBackgroundColor: Colors.black45,
-        color: Colors.blue,
+        color:Color.fromARGB(255, 69, 107, 59),
         items: [
          Icon(Icons.home),
           Icon(Icons.add_circle,size: 40,),  

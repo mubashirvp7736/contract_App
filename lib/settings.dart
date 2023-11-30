@@ -1,4 +1,5 @@
 
+import 'package:contracterApp/empty/emptyScreeen.dart';
 import 'package:flutter/material.dart';
 
 class Account extends StatelessWidget {
@@ -10,18 +11,23 @@ class Account extends StatelessWidget {
     'About',
   ];
 final screens = [
+home(),
+account(),
+Settings(),
+Aboute()
+
 ];
   List holcon=[
-  Icon(Icons.home),
-  Icon(Icons.person),
-  Icon(Icons.settings),
-  Icon(Icons.camera)
+  Icon(Icons.home,color: Colors.white,),
+  Icon(Icons.person,color: Colors.white),
+  Icon(Icons.settings,color: Colors.white),
+  Icon(Icons.camera,color: Colors.white)
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       backgroundColor: Colors.blueGrey,
+       backgroundColor:  Color(0xFF7C8363),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -74,17 +80,17 @@ final screens = [
                     },
                   ));
                 },
-                trailing: Icon(Icons.arrow_forward_ios, size: 15),
+                trailing: Icon(Icons.arrow_forward_ios, size: 15,color: Colors.white,),
                 title: Text(
                   listText[index],
-                  style: TextStyle(fontSize: 14),
+                  style: TextStyle(fontSize: 14,color: Colors.white),
                 ),
               ),
               separatorBuilder: (context, index) => Divider(),
               itemCount: 4,
             ),
             Center(
-              child: Text('Version 9.15.0'),
+              child: Text('Version 9.15.0',style: TextStyle(color: Colors.white),),
             ),
           ],
         ),

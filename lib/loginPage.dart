@@ -14,10 +14,10 @@ class _UserLoginState extends State<UserLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey,
+      backgroundColor:Color(0xFF68A4A5),
        appBar: AppBar(
         title: Text('User Login'),
-        backgroundColor: Colors.indigo,
+        backgroundColor:Color(0xFF7C8363),
       
        ),
        body:Container(
