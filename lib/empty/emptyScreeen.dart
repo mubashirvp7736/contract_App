@@ -10,7 +10,6 @@ Widget home(){
       child: Text('Home details',style: TextStyle(fontSize: 40),),
     ),
    );
-
 }
 Widget account(){
    return Scaffold(
@@ -20,7 +19,6 @@ Widget account(){
       child: Text('Account details',style: TextStyle(fontSize: 40),),
     ),
    );
-
 }
 Widget Settings(){
    return Scaffold(
@@ -29,7 +27,7 @@ Widget Settings(){
     ),    body: Center(
       child: Text('Setting details',style: TextStyle(fontSize: 40),),
     ),
-   );
+  );
 
 }
 Widget Aboute(){

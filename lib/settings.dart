@@ -19,7 +19,7 @@ Aboute()
 ];
   List holcon=[
   Icon(Icons.home,color: Colors.white,),
-  Icon(Icons.person,color: Colors.white),
+  Icon(Icons.person,color: const Color.fromARGB(255, 114, 103, 103)),
   Icon(Icons.settings,color: Colors.white),
   Icon(Icons.camera,color: Colors.white)
   ];

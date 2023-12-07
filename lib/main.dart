@@ -2,6 +2,7 @@
 import 'package:contracterApp/splashScreen.dart';
 import 'package:flutter/material.dart';
 
+const save_key_name='userlogin';
 void main() {
   runApp(const MyApp());
 }

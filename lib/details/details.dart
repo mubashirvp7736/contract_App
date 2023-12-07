@@ -27,13 +27,15 @@ class Details extends StatelessWidget {
                       color: Colors.red,
                       size: 70,)
                 ),
-                Column(
-                  children: [
-                    Text('Name 1',style: TextStyle(fontSize: 20),),SizedBox(height: 10,),   
-                    Text('Age',style: TextStyle(fontSize: 20),),SizedBox(height: 20,),
-                    Text('7736175661',style: TextStyle(fontSize: 20),), SizedBox(height: 20,),                
-                    Text('Job Categorie',style: TextStyle(fontSize: 20),),
-                  ],
+                SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Text('Name 1',style: TextStyle(fontSize: 20),),SizedBox(height: 10,),   
+                      Text('Age',style: TextStyle(fontSize: 20),),SizedBox(height: 20,),
+                      Text('7736175661',style: TextStyle(fontSize: 20),), SizedBox(height: 20,),                
+                      Text('Job Categorie',style: TextStyle(fontSize: 20),),
+                    ],
+                  ),
                 ),
               ],
             ),
