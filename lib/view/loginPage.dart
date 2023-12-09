@@ -1,9 +1,6 @@
 
-import 'package:contracterApp/addWorkers.dart';
-import 'package:contracterApp/homePage.dart';
-import 'package:contracterApp/main.dart';
+import 'package:contracterApp/db/function/functions.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 class UserLogin extends StatefulWidget {
   const UserLogin({super.key});
 
@@ -54,12 +51,17 @@ class _UserLoginState extends State<UserLogin> {
                           enabledBorder: 
                           OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white,
-                            
-                          
                           ),
-                     borderRadius: BorderRadius.circular(60),), hintText: 'UserName',),)
+                     borderRadius: BorderRadius.circular(60),), 
+                       focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                        borderRadius: BorderRadius.circular(30)
+                      ),
+                    
+                     hintText: 'UserName',),)
                      ,SizedBox(height: 16,),
                       TextFormField(
+                        keyboardType: TextInputType.numberWithOptions(),
                      controller: _password,
                       style: TextStyle(color: Colors.white),
                      decoration: InputDecoration(
@@ -76,13 +78,13 @@ class _UserLoginState extends State<UserLogin> {
                      style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.white)),
                   onPressed: (){
                     if(_form.currentState!.validate()){
-                  checkLogin(context);
+                  checkLogin(context,_username,_password);
                      }else{
                      print('data is empty');
                         }
-                   checkLogin(context);
+                        null;
+                  //  checkLogin(context,_username,_password);
                      },
-                   
                   child:Text('SUBMIT',style: TextStyle(color: Colors.black),)
                       )
                     ],
@@ -94,18 +96,4 @@ class _UserLoginState extends State<UserLogin> {
        )
         );
   }
-  void checkLogin(BuildContext context)async{
-  final _usernames=_username.text;
-  final _passwords=_password.text;
-
-  if(_usernames=='mubu'&& _passwords=='7736'){
-   print('suuccessful');
-   final _sharedpref= await SharedPreferences.getInstance();
-   await _sharedpref.setBool(save_key_name, true);
-   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>HomeScreen()));
-  }else{
-    final _errormessage='username password doesnot match';
-  }
-
-  }
-}
+ }

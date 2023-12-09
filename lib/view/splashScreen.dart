@@ -1,5 +1,5 @@
 
-import 'package:contracterApp/loginPage.dart';
+import 'package:contracterApp/db/function/functions.dart';
 import 'package:flutter/material.dart';
 
 class Splash extends StatefulWidget {
@@ -13,8 +13,8 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> {
   @override
   void initState() {
-  gotoScreen();
-
+  gotoScreen(context);
+ checkuserlogin(context);
     super.initState();
   }
   Widget build(BuildContext context) {
@@ -26,8 +26,4 @@ class _SplashState extends State<Splash> {
     );
   }
 
-  Future<void> gotoScreen()async{
-    await Future.delayed(Duration(seconds: 4));
-  Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => UserLogin(),));
-  }
 }

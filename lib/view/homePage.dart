@@ -1,10 +1,13 @@
 
-import 'package:contracterApp/addWorkers.dart';
-import 'package:contracterApp/settings.dart';
-import 'package:contracterApp/workDetails.dart';
+import 'package:contracterApp/db/function/functions.dart';
+import 'package:contracterApp/view/addWorker.dart';
+import 'package:contracterApp/view/workersDetails.dart';
+import 'package:contracterApp/view/settings.dart';
+import 'package:contracterApp/view/tab.dart';
+
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:contracterApp/drawer/drawer.dart';
+import 'package:contracterApp/view/drawer.dart';
 import 'dart:io';
 
 class HomeScreen extends StatefulWidget {
@@ -13,15 +16,14 @@ class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
-
 class _HomeScreenState extends State<HomeScreen> {
   int indexnum = 0;
   List Widgets = [
-    AddWorkers(),
-    DetailsAdd(),
-    Account(),
+     ListWorkers(),
+      addstuds(),
+       TabPage(),
+       Account(),
   ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +45,8 @@ class _HomeScreenState extends State<HomeScreen> {
         color:Color.fromARGB(255, 69, 107, 59),
         items: [
          Icon(Icons.home),
-          Icon(Icons.add_circle,size: 40,),  
+          Icon(Icons.add_circle,size: 40,),
+          Icon(Icons.table_rows_sharp),  
           Icon(Icons.settings,), 
         ],
         backgroundColor:Colors.white,
@@ -57,34 +60,5 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Widgets.elementAt(indexnum),
     );
   }
-  void showPopupMenu(BuildContext context) {
-    showMenu(
-      context: context,
-      position: RelativeRect.fromRect(
-        Rect.fromPoints(
-          Offset(100, 100), 
-          Offset(200, 200),
-        ),
-        Offset.zero & MediaQuery.of(context).size
-      ),
-      items: [
-        PopupMenuItem(
-          child: ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Settings'),
-            onTap: () {
-            },
-          ),
-        ),
-        PopupMenuItem(
-          child: ListTile(
-            leading: Icon(Icons.logout),
-            title: Text('Logout'),
-            onTap: () {
-            },
-          ),
-        ),
-      ],
-    );
-  }
+ 
 }

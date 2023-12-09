@@ -1,7 +1,6 @@
 
-import 'package:contracterApp/empty/emptyScreeen.dart';
+import 'package:contracterApp/view/emptyScreeen.dart';
 import 'package:flutter/material.dart';
-
 class Account extends StatelessWidget {
   Account({Key? key}) : super(key: key);
   final listText = [
@@ -9,13 +8,12 @@ class Account extends StatelessWidget {
     'Account',
     'settings',
     'About',
-  ];
+   ];
 final screens = [
 home(),
 account(),
 Settings(),
 Aboute()
-
 ];
   List holcon=[
   Icon(Icons.home,color: Colors.white,),
@@ -23,7 +21,6 @@ Aboute()
   Icon(Icons.settings,color: Colors.white),
   Icon(Icons.camera,color: Colors.white)
   ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,8 +77,8 @@ Aboute()
                     },
                   ));
                 },
-                trailing: Icon(Icons.arrow_forward_ios, size: 15,color: Colors.white,),
-                title: Text(
+                  trailing: Icon(Icons.arrow_forward_ios, size: 15,color: Colors.white,),
+                  title: Text(
                   listText[index],
                   style: TextStyle(fontSize: 14,color: Colors.white),
                 ),
@@ -97,5 +94,5 @@ Aboute()
       ),
     );
   }
-}
+}  
  
