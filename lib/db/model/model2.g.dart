@@ -1,22 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'model.dart';
+part of 'model2.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class JobworkersAdapter extends TypeAdapter<Jobworkers> {
+class JobworkerAdapter extends TypeAdapter<Jobworker> {
   @override
   final int typeId = 1;
 
   @override
-  Jobworkers read(BinaryReader reader) {
+  Jobworker read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Jobworkers(
+    return Jobworker(
       name: fields[1] as String,
       number: fields[2] as String,
       age: fields[3] as String,
@@ -27,7 +27,7 @@ class JobworkersAdapter extends TypeAdapter<Jobworkers> {
   }
 
   @override
-  void write(BinaryWriter writer, Jobworkers obj) {
+  void write(BinaryWriter writer, Jobworker obj) {
     writer
       ..writeByte(6)
       ..writeByte(0)
@@ -50,7 +50,7 @@ class JobworkersAdapter extends TypeAdapter<Jobworkers> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is JobworkersAdapter &&
+      other is JobworkerAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
