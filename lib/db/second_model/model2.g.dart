@@ -6,30 +6,29 @@ part of 'model2.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class JobworkerAdapter extends TypeAdapter<Jobworker> {
+class ProfileModelAdapter extends TypeAdapter<ProfileModel> {
   @override
-  final int typeId = 1;
+  final int typeId = 2;
 
   @override
-  Jobworker read(BinaryReader reader) {
+  ProfileModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Jobworker(
+    return ProfileModel(
       name: fields[1] as String,
       number: fields[2] as String,
       age: fields[3] as String,
-      jobcategories: fields[4] as String,
       index: fields[0] as int?,
-      image: fields[5] as String?,
+      image: fields[4] as String?,
     );
   }
 
   @override
-  void write(BinaryWriter writer, Jobworker obj) {
+  void write(BinaryWriter writer, ProfileModel obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.index)
       ..writeByte(1)
@@ -39,8 +38,6 @@ class JobworkerAdapter extends TypeAdapter<Jobworker> {
       ..writeByte(3)
       ..write(obj.age)
       ..writeByte(4)
-      ..write(obj.jobcategories)
-      ..writeByte(5)
       ..write(obj.image);
   }
 
@@ -50,7 +47,7 @@ class JobworkerAdapter extends TypeAdapter<Jobworker> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is JobworkerAdapter &&
+      other is ProfileModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

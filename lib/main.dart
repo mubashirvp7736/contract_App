@@ -1,7 +1,7 @@
 
 import 'package:contracterApp/db/model/model.dart';
+import 'package:contracterApp/db/second_model/model2.dart';
 import 'package:contracterApp/view/splashScreen.dart';
-import 'package:contracterApp/view/workersDetails.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -12,15 +12,19 @@ const save_key='';
    if (!Hive.isAdapterRegistered(JobworkersAdapter().typeId)) {
      Hive.registerAdapter(JobworkersAdapter());
   }
+if (!Hive.isAdapterRegistered(ProfileModelAdapter().typeId)){
+  Hive.registerAdapter(ProfileModelAdapter());
+}
   runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: Splash(),
       debugShowCheckedModeBanner: false,
     );
     }
-    }
+   }

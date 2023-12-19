@@ -1,10 +1,10 @@
  import 'package:hive_flutter/adapters.dart';
  part 'model2.g.dart';
-@HiveType(typeId: 1)
+@HiveType(typeId: 2)
 
-class Jobworker {
+class ProfileModel {
 
-@HiveField(0)
+ @HiveField(0)
  int? index;
 
 @HiveField(1)
@@ -17,10 +17,9 @@ final String number;
 final String age ;
 
 @HiveField(4)
-final String jobcategories;
-
-@HiveField(5)
 final String? image;
 
-Jobworker({ required this.name,required this.number, required this.age,required this.jobcategories, this.index,this.image});
+ProfileModel({required this.name,required this.number,required this.age, this.index,this.image});
+
+  get jobcategorie => null;
 }

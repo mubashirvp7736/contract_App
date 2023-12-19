@@ -21,7 +21,6 @@ class _addstudsState extends State<addstuds> {
   final _namecontroller=TextEditingController();
   final _numbercontroller=TextEditingController();
   final _agecontroller=TextEditingController();
-  final _corsecontroller=TextEditingController();
   final ImagePicker imagePicker=ImagePicker();
   File? picked;
 
@@ -32,7 +31,7 @@ String? _selectedJobCategory;
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color.fromARGB(255, 186, 187, 182),
+        backgroundColor: Colors.white,
         body:  Form(
           key: _formkey,
           child: SingleChildScrollView(
@@ -41,15 +40,16 @@ String? _selectedJobCategory;
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  SizedBox(height: 5,),
                   GestureDetector(
                     onTap: () => getimage(ImageSource.camera),
-                    child: CircleAvatar(backgroundColor: Colors.black,child:
+                    child: CircleAvatar(backgroundColor: Colors.orange[200],child:
                     picked== null?Icon(Icons.add_a_photo):ClipOval(child: Image.file(picked!,fit: BoxFit.cover,   height: 120,
                               width: 120,),),
                     radius: 60,),
                   ),
-                  SizedBox(height: 10,),
-                   SizedBox(height: 20,),
+
+                   SizedBox(height: 10,),
                   TextFormField(
                     keyboardType:TextInputType.text ,
                     inputFormatters:[FilteringTextInputFormatter.allow(RegExp(r'[a-zA-z\s]'))],
@@ -144,7 +144,7 @@ String? _selectedJobCategory;
       },
    ),
 
-     SizedBox(height: 20,),
+     SizedBox(height: 10,),
         ElevatedButton(onPressed: (){
      if(_formkey.currentState!.validate()){
       onAddStudentOnClick();
@@ -176,7 +176,7 @@ String? _selectedJobCategory;
 
   }
    getimage(ImageSource source) async {
-    var img = await imagePicker.pickImage(source: source);
+    var img = await imagePicker.pickImage(source: ImageSource.gallery);
     setState(() {
       picked = File(img!.path);
       

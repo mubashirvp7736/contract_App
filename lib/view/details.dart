@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 class Details extends StatelessWidget {
@@ -21,25 +23,30 @@ class Details extends StatelessWidget {
           child: Container(
             height: MediaQuery.of(context).size.height*0.3,
             width: MediaQuery.of(context).size.width*1.12,
-            color: Colors.blueGrey,
+           //color: Colors.greenAccent,
+            decoration: BoxDecoration( color: Colors.blueGrey[200],// Background color
+              borderRadius: BorderRadius.circular(20), // Rounded corners
+              border: Border.all(
+                color: Colors.black,
+                width: 2,)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CircleAvatar(
                    maxRadius: 40,
-                   backgroundImage: AssetImage(image),
-                   child: Icon(
-                      Icons.person_outline_rounded,
-                      color: Colors.red,
-                      size: 30,)
+                   backgroundImage: FileImage(File(image)),
+                  //  child: Icon(
+                  //     Icons.person_outline_rounded,
+                  //     color: Colors.red,
+                  //     size: 30,)
                 ),
                 SingleChildScrollView(
                   child: Column(
                     children: [
-                      Text(name,style: TextStyle(fontSize: 20),),SizedBox(height: 10,),   
-                      Text(number,style: TextStyle(fontSize: 20),),SizedBox(height: 20,),
-                      Text(age,style: TextStyle(fontSize: 20),), SizedBox(height: 20,),                
-                      Text(jobcategories,style: TextStyle(fontSize: 20),),
+                      Text('Name: $name',style: TextStyle(fontSize: 20),),SizedBox(height: 10,),   
+                      Text('Number :$number',style: TextStyle(fontSize: 20),),SizedBox(height: 20,),
+                      Text('Age : $age',style: TextStyle(fontSize: 20),), SizedBox(height: 20,),                
+                      Text('job:  $jobcategories',style: TextStyle(fontSize: 20),),
                     ],
                   ),
                 ),

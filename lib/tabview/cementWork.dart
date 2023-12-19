@@ -159,15 +159,15 @@ class _ListStudentState extends State<Cement> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => EditScreen(
-                            index: index,
-                            name: data.name,
-                            number: data.number,
-                            age: data.age,
-                            jobcategories: data.jobcategories,
-                            image: data.image!,
-                          ),
+                         builder: (context) => editscreen(
+                          index: index,
+                          name: data.name,
+                          number: data.number,
+                          age: data.age,
+                          jobcategorie: data.jobcategories ,
+                          image: data.image!,
                         ),
+                       ),
                       );
                     },
                     icon: Icon(Icons.edit),

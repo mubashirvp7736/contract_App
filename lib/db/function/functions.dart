@@ -1,4 +1,5 @@
 import 'package:contracterApp/db/model/model.dart';
+import 'package:contracterApp/db/second_function/function2.dart';
 import 'package:contracterApp/main.dart';
 import 'package:contracterApp/view/homePage.dart';
 import 'package:contracterApp/view/loginPage.dart';
@@ -68,20 +69,14 @@ Future<void>getstoreditems()async{
         Offset.zero & MediaQuery.of(context).size
       ),
       items: [
-        PopupMenuItem(
-          child: ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Settings'),
-            onTap: () {
-            },
-          ),
-        ),
+        
         PopupMenuItem(
           child: ListTile(
             leading: Icon(Icons.logout),
             title: Text('Logout'),
             onTap: () {
               Logout();
+              logout();
               Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => UserLogin(),), (route) => false);
             },
           ),
@@ -94,3 +89,15 @@ Future<void> Logout()async{
    await jobworkerDb.clear();
   getAllStud();
 }
+// Future<void> updatestudent(int index)async{
+//     final jobworkerDb=await Hive.openBox<Jobworkers>('student_db');
+//       final stdupdate = Jobworkers(
+//         name: _namecontroller.text,
+//          number:_numberController.text ,
+//          age:_agecontroller.text ,
+//          jobcategories:_jobcategories.text ,
+//          image: image,
+//         );
+//         await jobworkerDb.putAt(index, stdupdate);
+//         getAllStud();
+//   }

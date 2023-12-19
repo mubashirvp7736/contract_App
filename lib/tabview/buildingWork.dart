@@ -162,15 +162,15 @@ Building> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => EditScreen(
-                            index: index,
-                            name: data.name,
-                            number: data.number,
-                            age: data.age,
-                            jobcategories: data.jobcategories,
-                            image: data.image!,
-                          ),
+                          builder: (context) => editscreen(
+                          index: index,
+                          name: data.name,
+                          number: data.number,
+                          age: data.age,
+                          jobcategorie: data.jobcategories ,
+                          image: data.image!,
                         ),
+                       ),
                       );
                     },
                     icon: Icon(Icons.edit),
@@ -195,12 +195,11 @@ Building> {
   Widget buildStudentList() {
     return ValueListenableBuilder(
       valueListenable: jobworkernotifier,
-      builder: (BuildContext ctx, List<Jobworkers> studentlist, Widget? child) {
-        final filteredBreakfastList = studentlist
+      builder: (BuildContext ctx, List<Jobworkers> wlist, Widget? child) {
+        final filteredBreakfastList = wlist
             .where((food) =>
                 food.jobcategories.contains('BuildingWork') == true)
             .toList();
-
         return ListView.separated(
           itemBuilder: (ctx, index) {
             final data = filteredBreakfastList[index];

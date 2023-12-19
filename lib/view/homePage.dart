@@ -1,6 +1,9 @@
 
 import 'package:contracterApp/db/function/functions.dart';
+import 'package:contracterApp/db/second_model/model2.dart';
 import 'package:contracterApp/view/addWorker.dart';
+import 'package:contracterApp/view/emptyScreeen.dart';
+import 'package:contracterApp/view/showDrawe.dart';
 import 'package:contracterApp/view/workersDetails.dart';
 import 'package:contracterApp/view/settings.dart';
 import 'package:contracterApp/view/tab.dart';
@@ -8,10 +11,9 @@ import 'package:contracterApp/view/tab.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:contracterApp/view/drawer.dart';
-import 'dart:io';
+
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -24,11 +26,13 @@ class _HomeScreenState extends State<HomeScreen> {
        TabPage(),
        Account(),
   ];
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Navbar(),
+      drawer: ScreenDrawer(),
       appBar: AppBar(
+        centerTitle: true,
         title: Text('HomePage',style: TextStyle(color:Color(0xFFF6EDE3) ),),
         actions: [
           IconButton(

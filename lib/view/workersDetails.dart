@@ -6,12 +6,9 @@ import 'package:contracterApp/view/details.dart';
 import 'package:contracterApp/view/edit.dart';
 import 'package:flutter/material.dart';
 
-
 class ListWorkers extends StatefulWidget {
   final String? selectedJobCategory;
-
   const ListWorkers({Key? key, this.selectedJobCategory}) : super(key: key);
-
   @override
   _ListStudentState createState() => _ListStudentState();
 }
@@ -20,7 +17,6 @@ class _ListStudentState extends State<ListWorkers> {
   TextEditingController searchController = TextEditingController();
   List<Jobworkers> workersList = [];
   List<Jobworkers> filteredworkerList = [];
-
 
   bool isSearching = false;
 
@@ -48,8 +44,6 @@ class _ListStudentState extends State<ListWorkers> {
   @override
   Widget build(BuildContext context) {
       List<Jobworkers> allWorkers = workersList;
-
-    // Filter workers based on the selected job category
     List<Jobworkers> filteredWorkers = allWorkers
         .where((worker) => worker.jobcategories == workersList)
         .toList();
@@ -161,12 +155,12 @@ Widget buildStudentCard(Jobworkers data, int index) {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => EditScreen(
+                        builder: (context) => editscreen(
                           index: index,
                           name: data.name,
                           number: data.number,
                           age: data.age,
-                          jobcategories: data.jobcategories,
+                          jobcategorie: data.jobcategories ,
                           image: data.image!,
                         ),
                       ),
@@ -196,7 +190,7 @@ Widget buildStudentCard(Jobworkers data, int index) {
       builder: (BuildContext ctx, List<Jobworkers> studentlist, Widget? child) {
         workersList = studentlist;
         filteredworkerList = List.from(workersList);
-
+        
         return ListView.separated(
           itemBuilder: (ctx, index) {
             final data = workersList[index];
