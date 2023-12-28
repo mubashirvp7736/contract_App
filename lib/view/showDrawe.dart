@@ -36,16 +36,24 @@ class _ScreenDrawerState extends State<ScreenDrawer> {
               final data = value[index];
               return Padding(
                 padding: const EdgeInsets.only(top: 120),
-                child: Column(
-
-                  children: [
-                    CircleAvatar(
-                       backgroundImage: FileImage(File(data.image!)),maxRadius:60 ,
-                    ),
-                    Text('Name: ${data.name}',style: TextStyle(fontSize: 30),),SizedBox(height: 10,),
-                    Text('No:  ${data.age}',style: TextStyle(fontSize: 30),),SizedBox(height: 10,),
-                     Text('Age:${data.number}',style: TextStyle(fontSize: 30),),SizedBox(height: 10,),
-                  ],
+                child: Container(
+                     decoration: BoxDecoration( color: Colors.deepPurple[50],// Background color
+              borderRadius: BorderRadius.horizontal(left:Radius.circular(30),right:Radius.circular(30) ), // Rounded corners
+              border: Border.all(
+                color: Colors.black,
+                width: 1,)),
+         
+                  child: Column(
+                  
+                    children: [
+                      CircleAvatar(
+                         backgroundImage: FileImage(File(data.image!)),maxRadius:60 ,
+                      ),
+                      Text('Name: ${data.name}',style: TextStyle(fontSize: 30),),SizedBox(height: 10,),
+                      Text('No:  ${data.age}',style: TextStyle(fontSize: 30),),SizedBox(height: 10,),
+                       Text('Age:${data.number}',style: TextStyle(fontSize: 30),),SizedBox(height: 10,),
+                    ],
+                  ),
                 ),
               );
             },

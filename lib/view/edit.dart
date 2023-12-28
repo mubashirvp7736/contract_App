@@ -222,11 +222,7 @@ class _editscreenState extends State<editscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.red,
-        centerTitle: true,
-        title: Text("EDIT STUDENT"),
-      ),
+      backgroundColor: Colors.purple[50],
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Form(
@@ -320,7 +316,9 @@ class _editscreenState extends State<editscreen> {
       return null;
            }
       },
-   ), ElevatedButton.icon(onPressed: (){ 
+   ),
+   SizedBox(height: 10,),
+    ElevatedButton.icon(onPressed: (){ 
                      Navigator.pop(context);
                      updatestudent(widget.index);
                     }, icon: Icon(Icons.save), label: Text("UPDATE"))

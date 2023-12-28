@@ -2,9 +2,11 @@
 import 'dart:io';
 import 'package:contracterApp/db/function/functions.dart';
 import 'package:contracterApp/db/model/model.dart';
+import 'package:contracterApp/provider/providerdetails.dart';
 import 'package:contracterApp/view/details.dart';
 import 'package:contracterApp/view/edit.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ListWorkers extends StatefulWidget {
   final String? selectedJobCategory;
@@ -14,73 +16,45 @@ class ListWorkers extends StatefulWidget {
 }
 
 class _ListStudentState extends State<ListWorkers> {
-  TextEditingController searchController = TextEditingController();
-  List<Jobworkers> workersList = [];
-  List<Jobworkers> filteredworkerList = [];
-
-  bool isSearching = false;
-
+  // List<Jobworkers> workersList = [];
+  // List<Jobworkers> filteredworkerList = [];
+  String ? image;
   @override
   void initState() {
     super.initState();
   
     getAllStud();
   }
-
-  void filterworkers(String search) {
-    if (search.isEmpty) {
-      setState(() {
-        filteredworkerList = List.from(workersList);
-      });
-    } else {
-      setState(() {
-        filteredworkerList = workersList
-            .where((student) =>
-                student.name.toLowerCase().contains(search.toLowerCase()))
-            .toList();
-      });
-    }
-  }
+  
   @override
   Widget build(BuildContext context) {
-      List<Jobworkers> allWorkers = workersList;
-    List<Jobworkers> filteredWorkers = allWorkers
-        .where((worker) => worker.jobcategories == workersList)
-        .toList();
-
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white24,
-           title: isSearching ? buildSearchField() : Text("workers List"),
+           title: Provider.of<ProviderDemo>(context,listen: false).isSearching ? buildSearchField() : Text("workers List"),
           automaticallyImplyLeading: false,
           actions: [
             IconButton(
               onPressed: () {
-                setState(() {
-                  isSearching = !isSearching;
-                  if (!isSearching) {
-                    searchController.clear();
-                    filteredworkerList = List.from(workersList);
-                  }
-                });
+                Provider.of<ProviderDemo>(context,listen: false).serachh();
               },
-              icon: Icon(isSearching ? Icons.cancel : Icons.search),
+              icon: Icon(Provider.of<ProviderDemo>(context).isSearching ? Icons.cancel : Icons.search),
             ),
           ],
         ),
         body: Center(
-          child: isSearching
-                          ? filteredworkerList.isNotEmpty
+          child: Provider.of<ProviderDemo>(context,listen: false).isSearching 
+                          ?Provider.of<ProviderDemo>(context).filteredworkerList.isNotEmpty
                         ? ListView.separated(
                       itemBuilder: (ctx, index) {
-                        final data = filteredworkerList[index];
+                        final data = Provider.of<ProviderDemo>(context,listen: false).filteredworkerList[index];
                         return buildStudentCard(data, index);
                       },
                       separatorBuilder: (ctx, index) {
                         return const Divider();
                       },
-                      itemCount: filteredworkerList.length,
+                      itemCount:Provider.of<ProviderDemo>(context,listen: false).filteredworkerList.length,
                     )
                   : Center(
                       child: Text("No results found."),
@@ -93,9 +67,9 @@ class _ListStudentState extends State<ListWorkers> {
   }
   Widget buildSearchField() {
     return TextField(
-      controller: searchController,
+      controller:Provider.of<ProviderDemo>(context,listen: false).searchController,
       onChanged: (query) {
-        filterworkers(query);
+        Provider.of<ProviderDemo>(context,listen: false).filterworkers(query);
       },
       autofocus: true,
       style: TextStyle(
@@ -117,89 +91,95 @@ Widget buildStudentCard(Jobworkers data, int index) {
         return Details(name: data.name, number: data.number, age:data. age, jobcategories:data. jobcategories,image: data.image!,);
       },));
     },
-    child: Card(
-      color: Color.fromARGB(255, 241, 227, 227),
-      child: Container(
-        padding: EdgeInsets.all(15),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CircleAvatar(
-              maxRadius: 30,
-              backgroundColor: Colors.black,
-              backgroundImage: FileImage(File(data.image!)),
-            ),
-            SizedBox(width: 15),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ListTile(
-                    title: Text(data.name),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(data.number),
-                        Text(data.age),
-                        Text(data.jobcategories),
-                      ],
-                    ),
-                  ),
-                ],
+    child: Padding(
+      padding: EdgeInsets.all(12),
+      child: Card(
+        color: Color.fromARGB(255, 241, 227, 227),
+        child: Container(
+          padding: EdgeInsets.all(15),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CircleAvatar(
+                maxRadius: 30,
+                backgroundColor: Colors.black,
+                backgroundImage: FileImage(File(data.image!)),
               ),
-            ),
-            Column(
-              children: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => editscreen(
-                          index: index,
-                          name: data.name,
-                          number: data.number,
-                          age: data.age,
-                          jobcategorie: data.jobcategories ,
-                          image: data.image!,
-                        ),
+              SizedBox(width: 15),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ListTile(
+                      title: Text('Name: ${data.name}',style:TextStyle(fontStyle: FontStyle.italic) ,),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('MOB: ${data.number}'),
+                          Text('Age: ${data.age}'),
+                          Text( 'Job:${data.jobcategories}'),
+                        ],
                       ),
-                    );
-                  },
-                  icon: Icon(Icons.edit),
-                  color: Color.fromARGB(255, 0, 0, 0),
+                    ),
+                  ],
                 ),
-                IconButton(
-                  onPressed: () {
-                    deletestud(index);
-                  },
-                  icon: Icon(Icons.delete),
-                  color: Colors.red,
-                ),
-              ],
-            ),
-          ],
+              ),
+              Column(
+                children: [
+                  IconButton(
+                    onPressed: () { 
+                      showModalBottomSheet(context: context, builder: (context) {
+                        return editScreen(name: data.name, number:data. number, age:data.age, jobCategory:data. jobcategories, index: index, image:data.image!);
+                      },);
+                    },
+                    icon: Icon(Icons.edit),
+                    color: Color.fromARGB(255, 0, 0, 0),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      showDialog(context: context,
+                       builder:(context) {
+                         return AlertDialog(
+                          title: Text('Are you sure want to delete'),
+                          actions: [
+                            TextButton(onPressed: (){
+                              Navigator.pop(context);
+                            }, child:Text('close')),
+                            TextButton(onPressed: (){
+                               deletestud(index);
+                              Navigator.pop(context);
+                            }, child: Text('Delete'))
+                          ],
+                         );
+                       },);
+                     },
+                    icon: Icon(Icons.delete),
+                    color: Colors.red,
+                     ),
+                   ],
+                 ),
+               ],
+             ),
+          ),
         ),
       ),
-    ),
-  );
-}
-  Widget buildStudentList() {
+    );
+  }
+   Widget buildStudentList() {
     return ValueListenableBuilder(
       valueListenable: jobworkernotifier,
       builder: (BuildContext ctx, List<Jobworkers> studentlist, Widget? child) {
-        workersList = studentlist;
-        filteredworkerList = List.from(workersList);
-        
+        Provider.of<ProviderDemo>(context).workersList= studentlist;
+        Provider.of<ProviderDemo>(context).filteredworkerList = List.from(Provider.of<ProviderDemo>(context).workersList); 
         return ListView.separated(
           itemBuilder: (ctx, index) {
-            final data = workersList[index];
+            final data = Provider.of<ProviderDemo>(context).workersList[index];
             return buildStudentCard(data, index);
           },
           separatorBuilder: (ctx, index) {
             return const Divider();
           },
-          itemCount:workersList.length,
+          itemCount:Provider.of<ProviderDemo>(context).workersList.length,
         );
       },
     );
