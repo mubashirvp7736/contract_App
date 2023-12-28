@@ -19,7 +19,7 @@ class _AccountState extends State<Account> {
   List<String> listText = [ 'Account','about'];
 
   final screens = [
-   Details(),
+   details(),
    Aboute(),
    
     ];

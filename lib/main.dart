@@ -1,10 +1,13 @@
 
 import 'package:contracterApp/db/model/model.dart';
 import 'package:contracterApp/db/second_model/model2.dart';
+import 'package:contracterApp/provider/providerdetails.dart';
 import 'package:contracterApp/view/splashScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:provider/provider.dart';
+
 const save_key='';
  Future <void> main() async{
    WidgetsFlutterBinding.ensureInitialized();
@@ -15,16 +18,19 @@ const save_key='';
 if (!Hive.isAdapterRegistered(ProfileModelAdapter().typeId)){
   Hive.registerAdapter(ProfileModelAdapter());
 }
-  runApp(const MyApp());
+  runApp(const Myhome());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class Myhome extends StatelessWidget {
+  const Myhome({super.key});
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Splash(),
-      debugShowCheckedModeBanner: false,
+    return ChangeNotifierProvider(
+      create: (context) => ProviderDemo(),
+      child: const MaterialApp(
+        home: Splash(),
+        debugShowCheckedModeBanner:false,
+      ),
     );
     }
    }

@@ -7,14 +7,14 @@ import 'package:contracterApp/db/second_function/function2.dart';
 import 'package:contracterApp/db/second_model/model2.dart';
 import 'package:contracterApp/view/showDrawe.dart';
 
-class Details extends StatefulWidget {
-  const Details({Key? key}) : super(key: key);
+class details extends StatefulWidget {
+  const details({Key? key}) : super(key: key);
 
   @override
-  State<Details> createState() => _DetailsState();
+  State<details> createState() => _DetailsState();
 }
 
-class _DetailsState extends State<Details> {
+class _DetailsState extends State<details> {
   final ImagePicker _imagePicker = ImagePicker();
   final _nameController = TextEditingController();
   final _numberController = TextEditingController();
