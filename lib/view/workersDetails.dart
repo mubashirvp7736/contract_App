@@ -79,7 +79,7 @@ Widget buildStudentCard(Jobworkers data, int index) {
                   IconButton(
                     onPressed: () { 
                       showModalBottomSheet(context: context, builder: (context) {
-                        return EditScreen(name: data.name, number:data. number, age:data.age, jobCategory:data. jobcategories, index: index, image:data.image!);
+                        return EditScreen(name: data.name, number:data. number, age:data.age, jobCategory:data. jobcategories, index: index, image:data.image!, jobCategories: '',);
                       },);
                     },
                     icon: Icon(Icons.edit),

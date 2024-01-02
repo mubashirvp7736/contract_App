@@ -22,7 +22,6 @@ class ScreenDrawer extends StatelessWidget {
           title: Text('My Profile'),
         ),
         body: 
-        
         ValueListenableBuilder(
           valueListenable: profilNotifier,
           builder: (context, value, child) {

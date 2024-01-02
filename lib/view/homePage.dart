@@ -36,15 +36,16 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         title: Text('HomePage',style: TextStyle(color:Color(0xFFF6EDE3) ),),
         actions: [
+          IconButton(onPressed: (){
+         Navigator.push(context,MaterialPageRoute(builder:(context) =>  Searchworker()));  
+          }, icon: Icon(Icons.search)),
           IconButton(
             onPressed: () {
            Provider.of<Dbprovider>(context,listen: false).showPopupMenu(context);
             },
             icon: Icon(Icons.more_vert_outlined),
           ),
-          IconButton(onPressed: (){
-         Navigator.push(context,MaterialPageRoute(builder:(context) =>  Searchworker()));  
-          }, icon: Icon(Icons.search))
+          
         ],
         backgroundColor: Color.fromARGB(255, 69, 107, 59),
       ),

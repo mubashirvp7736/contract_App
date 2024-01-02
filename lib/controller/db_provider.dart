@@ -1,11 +1,15 @@
+import 'dart:io';
+
 import 'package:contracterApp/db/model/model.dart';
 import 'package:contracterApp/db/second_function/function2.dart';
 import 'package:contracterApp/db/services/db_Services.dart';
 import 'package:contracterApp/main.dart';
 import 'package:contracterApp/view/homePage.dart';
 import 'package:contracterApp/view/loginPage.dart';
+import 'package:contracterApp/view/workersDetails.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // ValueNotifier<List<Jobworkers>> jobworkernotifier=ValueNotifier([]);
@@ -212,5 +216,48 @@ Future <void>addworkers(Jobworkers value)async{
 
    }
   }
+ Future<void> updateStudent(int index) async {
+  
+  final TextEditingController name=TextEditingController();
+  final TextEditingController number=TextEditingController();
+  final TextEditingController age=TextEditingController();
+  final TextEditingController jobCategories=TextEditingController();
+  
+  File? selectimage;
+    final studentDb = await Hive.openBox<Jobworkers>("student_db");
 
+    if (index >= 0 && index < studentDb.length) {
+      final updatedStudent = Jobworkers(
+        name: name.text,
+        number: number.text,
+        age: age.text,
+        jobcategories: jobCategories.text,
+        image: selectimage!.path,
+      );
+
+      await studentDb.putAt(index, updatedStudent,);
+      getAllStud();
+
+     }
+  }
+   fromgallery() async {
+    
+  File? selectimage;
+    final returnedimage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+
+      selectimage = File(returnedimage!.path);
+      notifyListeners();
+  
+  }
+
+  fromcam() async {
+    
+  File? selectimage;
+    final returnedimage =
+        await ImagePicker().pickImage(source: ImageSource.camera);
+  
+      selectimage = File(returnedimage!.path);
+    notifyListeners();
+  }
 }

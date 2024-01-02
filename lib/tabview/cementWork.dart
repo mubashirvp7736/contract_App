@@ -318,7 +318,7 @@ Widget buildStudentCard(Jobworkers data, int index) {
                   IconButton(
                     onPressed: () { 
                       showModalBottomSheet(context: context, builder: (context) {
-                        return EditScreen(name: data.name, number:data. number, age:data.age, jobCategory:data. jobcategories, index: index, image:data.image!);
+                        return EditScreen(name: data.name, number:data. number, age:data.age, jobCategory:data. jobcategories, index: index, image:data.image!, jobCategories: '',);
                       },);
                     },
                     icon: Icon(Icons.edit),
@@ -356,24 +356,27 @@ Widget buildStudentCard(Jobworkers data, int index) {
   }
 
   Widget buildStudentList() {
-    return Consumer(
-      builder: (BuildContext ctx, List<Jobworkers> studentlist, Widget? child) {
-        final filteredBreakfastList = studentlist
-            .where((food) =>
-                food.jobcategories.contains('CementWork') == true)
-            .toList();
+    return 
+     Consumer<Dbprovider>(
+  builder: (context, dbvalue, child) {
+    final filteredWorkerList = dbvalue.workersList
+        .where((worker) => worker.jobcategories.contains('CementWork'))
+        .toList();
+    
+    Provider.of<Workerdetail>(context).filteredworkerList = List.from(filteredWorkerList);
 
-        return ListView.separated(
-          itemBuilder: (ctx, index) {
-            final data = filteredBreakfastList[index];
-            return buildStudentCard(data, index);
-          },
-          separatorBuilder: (ctx, index) {
-            return const Divider();
-          },
-          itemCount: filteredBreakfastList.length,
-        );
+    return ListView.separated(
+      itemBuilder: (ctx, index) {
+        final data = filteredWorkerList[index];
+        return buildStudentCard(data, index); 
       },
+      separatorBuilder: (ctx, index) {
+        return const Divider();
+      },
+      itemCount: filteredWorkerList.length,
     );
+  },
+);
+
   }
 }
