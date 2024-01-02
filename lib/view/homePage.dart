@@ -1,32 +1,33 @@
 
-import 'package:contracterApp/db/function/functions.dart';
-import 'package:contracterApp/db/second_model/model2.dart';
+import 'package:contracterApp/controller/db_provider.dart';
+import 'package:contracterApp/controller/Workerde.dart';
 import 'package:contracterApp/view/addWorker.dart';
-import 'package:contracterApp/view/emptyScreeen.dart';
+import 'package:contracterApp/view/search.dart';
 import 'package:contracterApp/view/showDrawe.dart';
 import 'package:contracterApp/view/workersDetails.dart';
 import 'package:contracterApp/view/settings.dart';
 import 'package:contracterApp/view/tab.dart';
-
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:contracterApp/view/drawer.dart';
-
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
+   HomeScreen ({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
+
 class _HomeScreenState extends State<HomeScreen> {
-  int indexnum = 0;
+     int indexnum = 0;
+
   List Widgets = [
      ListWorkers(),
       addstuds(),
        TabPage(),
        Account(),
   ];
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,10 +38,13 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              showPopupMenu(context);
+           Provider.of<Dbprovider>(context,listen: false).showPopupMenu(context);
             },
             icon: Icon(Icons.more_vert_outlined),
           ),
+          IconButton(onPressed: (){
+         Navigator.push(context,MaterialPageRoute(builder:(context) =>  Searchworker()));  
+          }, icon: Icon(Icons.search))
         ],
         backgroundColor: Color.fromARGB(255, 69, 107, 59),
       ),
@@ -59,10 +63,10 @@ class _HomeScreenState extends State<HomeScreen> {
           setState(() {
             indexnum = index;
           });
+        
         },
       ),
       body: Widgets.elementAt(indexnum),
     );
   }
- 
 }

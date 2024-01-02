@@ -8,14 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
-class Account extends StatefulWidget {
+class Account extends StatelessWidget {
   Account({Key? key}) : super(key: key);
 
-  @override
-  State<Account> createState() => _AccountState();
-}
-
-class _AccountState extends State<Account> {
   List<String> listText = [ 'Account','about'];
 
   final screens = [
@@ -31,6 +26,7 @@ class _AccountState extends State<Account> {
   ];
 
   File? picked;
+
   final ImagePicker imagePicker = ImagePicker();
 
   @override
@@ -89,8 +85,5 @@ class _AccountState extends State<Account> {
       ),
     );
   }
-
-
-  
 }
 

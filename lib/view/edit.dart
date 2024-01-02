@@ -574,8 +574,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:contracterApp/db/function/functions.dart';
+import 'package:contracterApp/controller/db_provider.dart';
 import 'package:contracterApp/db/model/model.dart';
+import 'package:provider/provider.dart';
 
 final _nameController = TextEditingController();
 final _numberController = TextEditingController();
@@ -584,7 +585,8 @@ final _jobCategoriesController = TextEditingController();
 
 String? image;
 
-class editScreen extends StatefulWidget {
+// ignore: must_be_immutable
+class EditScreen extends StatefulWidget {
   final String name;
   final String number;
   final String age;
@@ -592,7 +594,7 @@ class editScreen extends StatefulWidget {
   final String jobCategory;
   dynamic image;
 
-  editScreen({
+  EditScreen({
     super.key,
     required this.name,
     required this.number,
@@ -603,10 +605,10 @@ class editScreen extends StatefulWidget {
   });
 
   @override
-  State<editScreen> createState() => _EditScreenState();
+  State<EditScreen> createState() => _EditScreenState();
 }
 
-class _EditScreenState extends State<editScreen> {
+class _EditScreenState extends State<EditScreen> {
   @override
   void initState() {
     super.initState();
@@ -761,6 +763,6 @@ class _EditScreenState extends State<editScreen> {
       image: image,
     );
     await studentDb.putAt(index, updatedStudent);
-    getAllStud();
+    Provider.of<Dbprovider>(context,listen: false).getAllStud();
   }
 }

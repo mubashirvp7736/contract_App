@@ -4,12 +4,7 @@ import 'package:contracterApp/tabview/cementWork.dart';
 import 'package:contracterApp/tabview/painting.dart';
 import 'package:contracterApp/tabview/socialWork.dart';
 import 'package:flutter/material.dart';
-class TabPage extends StatefulWidget {
-  @override
-  State<TabPage> createState() => _TabPageState();
-}
-
-class _TabPageState extends State<TabPage> {
+class TabPage extends StatelessWidget {
   List<String> jobCategories = ['CementWork', 'BuildingWork', 'SocialWork', 'Painting'];
 
   List categor = [

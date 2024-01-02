@@ -1,18 +1,16 @@
 
-import 'package:contracterApp/db/function/functions.dart';
+import 'package:contracterApp/controller/db_provider.dart';
 import 'package:flutter/material.dart';
-class UserLogin extends StatefulWidget {
-  const UserLogin({super.key});
+import 'package:provider/provider.dart';
+class UserLogin extends StatelessWidget {
+   UserLogin({super.key});
 
-  @override
-  State<UserLogin> createState() => _UserLoginState();
-}
-
-class _UserLoginState extends State<UserLogin> {
    final _username=TextEditingController();
+
    final _password=TextEditingController();
 
  final _form=GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +76,7 @@ class _UserLoginState extends State<UserLogin> {
                      style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.white)),
                   onPressed: (){
                     if(_form.currentState!.validate()){
-                  checkLogin(context,_username,_password);
+                    Provider.of<Dbprovider>(context,listen: false).checkLogin(context,_username,_password);
                      }else{
                      print('data is empty');
                         }
@@ -96,4 +94,4 @@ class _UserLoginState extends State<UserLogin> {
        )
         );
   }
- }
+}

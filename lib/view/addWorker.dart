@@ -193,30 +193,22 @@
   
 // // }
 // }
-import 'dart:io';
-import 'package:contracterApp/db/function/functions.dart';
-import 'package:contracterApp/db/model/model.dart';
-import 'package:contracterApp/provider/providerdetails.dart';
-import 'package:contracterApp/view/workersDetails.dart';
+import 'package:contracterApp/controller/addProvider.dart';
+import 'package:contracterApp/controller/Workerde.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class addstuds extends StatelessWidget {
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _numberController = TextEditingController();
-  final TextEditingController _ageController = TextEditingController();
-
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Form(
-          key: _formKey,
+        backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
+        body:Consumer<Addworkers>(builder: (context, value, child) => 
+         Form(  
+          key:value.formKey,
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -226,16 +218,16 @@ class addstuds extends StatelessWidget {
                   SizedBox(height: 5,),
                   GestureDetector(
                     onTap: () =>
-                        Provider.of<ProviderDemo>(context, listen: false)
+                        Provider.of<Addworkers>(context, listen: false)
                             .pickImage(ImageSource.gallery),
                     child: CircleAvatar(
                       backgroundColor: Colors.orange[200],
-                      child: Provider.of<ProviderDemo>(context).pickedImage ==
+                      child: Provider.of<Addworkers>(context).pickedImage ==
                               null
                           ? Icon(Icons.add_a_photo)
                           : ClipOval(
                               child: Image.file(
-                                Provider.of<ProviderDemo>(context).pickedImage!,
+                                Provider.of<Addworkers>(context).pickedImage!,
                                 fit: BoxFit.cover,
                                 height: 120,
                                 width: 120,
@@ -250,7 +242,7 @@ class addstuds extends StatelessWidget {
                     inputFormatters: [
                       FilteringTextInputFormatter.allow(RegExp(r'[a-zA-z\s]'))
                     ],
-                    controller: _nameController,
+                    controller:value.nameController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20)),
@@ -270,7 +262,7 @@ class addstuds extends StatelessWidget {
                   TextFormField(
                     keyboardType: TextInputType.phone,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                    controller: _numberController,
+                    controller:value.numberController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20)),
@@ -292,7 +284,7 @@ class addstuds extends StatelessWidget {
                   TextFormField(
                     keyboardType: TextInputType.phone,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                    controller: _ageController,
+                    controller:value.ageController ,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20)),
@@ -311,7 +303,7 @@ class addstuds extends StatelessWidget {
                   ),
                   SizedBox(height: 10,),
                   DropdownButtonFormField<String>(
-                    value: Provider.of<ProviderDemo>(context).selectedJob,
+                    value: Provider.of<Addworkers>(context).selectedJob,
                     items: ['CementWork', 'BuildingWork', 'SocialWork', 'Painting']
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
@@ -320,7 +312,7 @@ class addstuds extends StatelessWidget {
                       );
                     }).toList(),
                     onChanged: (String? newValue) {
-                      Provider.of<ProviderDemo>(context, listen: false)
+                      Provider.of<Addworkers>(context, listen: false)
                           .selectJobCategory(newValue!);
                     },
                     decoration: InputDecoration(
@@ -341,9 +333,9 @@ class addstuds extends StatelessWidget {
                   ),
                   SizedBox(height: 10,),
                   ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        onAddStudentOnClick(context);
+                    onPressed: (){
+                      if ( value. formKey.currentState!.validate()) {
+                    Provider.of<Addworkers>(context,listen: false).onAddStudentOnClick(context);
                       }
                     },
                     child: Text("Add"),
@@ -354,31 +346,7 @@ class addstuds extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
+    ));
+  }}
 
-  Future<void> onAddStudentOnClick(context) async {
-    final _name = _nameController.text.trim();
-    final _numb = _numberController.text.trim();
-    final _age = _ageController.text.trim();
-    final _jobCategories =
-        Provider.of<ProviderDemo>(context, listen: false).selectedJob ?? '';
-    if (_name.isEmpty || _age.isEmpty || _jobCategories.isEmpty) {
-      return;
-    }
-
-    final _student = Jobworkers(
-      name: _name,
-      number: _numb,
-      age: _age,
-      jobcategories: _jobCategories,
-      image: Provider.of<ProviderDemo>(context, listen: false).pickedImage?.path ?? '',
-    );
-    addstud(_student);
-
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => ListWorkers(selectedJobCategory: _jobCategories)),
-    );
-  }
-}
+  

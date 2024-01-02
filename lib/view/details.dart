@@ -8,7 +8,7 @@ class Details extends StatelessWidget {
  final String age;
  final String jobcategories;
  final String image;
-
+ 
   const Details({super.key, required this.name, required this.number, required this.age, required this.jobcategories,required this.image});
 
   @override
@@ -24,8 +24,8 @@ class Details extends StatelessWidget {
             height: MediaQuery.of(context).size.height*0.3,
             width: MediaQuery.of(context).size.width*1.12,
            //color: Colors.greenAccent,
-            decoration: BoxDecoration( color: Colors.blueGrey[200],// Background color
-              borderRadius: BorderRadius.circular(20), // Rounded corners
+            decoration: BoxDecoration( color: Colors.blueGrey[200],
+              borderRadius: BorderRadius.circular(20), 
               border: Border.all(
                 color: Colors.black,
                 width: 2,)),

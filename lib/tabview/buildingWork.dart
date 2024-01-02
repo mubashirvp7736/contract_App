@@ -1,85 +1,59 @@
+
 import 'dart:io';
-import 'package:contracterApp/db/function/functions.dart';
+import 'package:contracterApp/controller/db_provider.dart';
+import 'package:contracterApp/controller/Workerde.dart';
 import 'package:contracterApp/db/model/model.dart';
+import 'package:contracterApp/controller/tabview.dart';
 import 'package:contracterApp/view/details.dart';
 import 'package:contracterApp/view/edit.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class 
-Building extends StatefulWidget {
+class Building extends StatefulWidget {
   final String? selectedJobCategory;
-
-  const 
-Building({Key? key, this.selectedJobCategory}) : super(key: key);
-
+  const Building({Key? key, this.selectedJobCategory}) : super(key: key);
   @override
+  // ignore: library_private_types_in_public_api
   _ListStudentState createState() => _ListStudentState();
 }
 
-class _ListStudentState extends State<
-Building> {
-  TextEditingController searchController = TextEditingController();
-  List<Jobworkers> workersList = [];
-  List<Jobworkers> filteredworkerList = [];
-
-  bool isSearching = false;
-
+class _ListStudentState extends State<Building> {
+  String ? image;
   @override
   void initState() {
-    super.initState();
-    getAllStud();
+    super.initState(); 
+   Provider.of<Dbprovider>(context,listen: false). getAllStud();
   }
-
-  void filterworkers(String search) {
-    if (search.isEmpty) {
-      setState(() {
-        filteredworkerList = List.from(workersList);
-      });
-    } else {
-      setState(() {
-        filteredworkerList = workersList
-            .where((student) =>
-                student.name.toLowerCase().contains(search.toLowerCase()))
-            .toList();
-      });
-    }
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white24,
-          title: isSearching ? buildSearchField() : Text("workers List"),
+           title: Provider.of<Tabviewdetail>(context,listen: false).isSearching ? buildSearchField() : Text("workers List"),
           automaticallyImplyLeading: false,
           actions: [
             IconButton(
               onPressed: () {
-                setState(() {
-                  isSearching = !isSearching;
-                  if (!isSearching) {
-                    searchController.clear();
-                    filteredworkerList = List.from(workersList);
-                  }
-                });
+                Provider.of<Tabviewdetail>(context,listen: false).serachh();
               },
-              icon: Icon(isSearching ? Icons.cancel : Icons.search),
+              icon: Icon(Provider.of<Tabviewdetail>(context).isSearching ? Icons.cancel : Icons.search),
             ),
           ],
         ),
         body: Center(
-          child: isSearching
-              ? filteredworkerList.isNotEmpty
-                  ? ListView.separated(
+          child: Provider.of<Tabviewdetail>(context,listen: false).isSearching 
+                          ?Provider.of<Tabviewdetail>(context).filteredworkerList.isNotEmpty
+                        ? ListView.separated(
                       itemBuilder: (ctx, index) {
-                        final data = filteredworkerList[index];
+                        final data = Provider.of<Tabviewdetail>(context,listen: false).filteredworkerList[index];
                         return buildStudentCard(data, index);
                       },
                       separatorBuilder: (ctx, index) {
                         return const Divider();
                       },
-                      itemCount: filteredworkerList.length,
+                      itemCount:Provider.of<Tabviewdetail>(context,listen: false).filteredworkerList.length,
                     )
                   : Center(
                       child: Text("No results found."),
@@ -90,40 +64,34 @@ Building> {
       ),
     );
   }
-
   Widget buildSearchField() {
     return TextField(
-      controller: searchController,
+      controller:Provider.of<Tabviewdetail>(context,listen: false).searchController,
       onChanged: (query) {
-        filterworkers(query);
+        Provider.of<Tabviewdetail>(context,listen: false).filterworkers(query);
       },
       autofocus: true,
       style: TextStyle(
-        color: Colors.white,
+        color: Colors.white, 
       ),
       decoration: InputDecoration(
         hintText: "Search students...",
         hintStyle: TextStyle(
-          color: Colors.white.withOpacity(0.7),
+          color: Colors.white.withOpacity(0.7), 
         ),
         border: InputBorder.none,
       ),
     );
   }
-
-  Widget buildStudentCard(Jobworkers data, int index) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          return Details(
-            name: data.name,
-            number: data.number,
-            age: data.age,
-            jobcategories: data.jobcategories,
-            image: data.image!,
-          );
-        }));
-      },
+Widget buildStudentCard(Jobworkers data, int index) {
+  return GestureDetector(
+    onTap: () {
+       Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+        return Details(name: data.name, number: data.number, age:data. age, jobcategories:data. jobcategories,image: data.image!,);
+      },));
+    },
+    child: Padding(
+      padding: EdgeInsets.all(12),
       child: Card(
         color: Color.fromARGB(255, 241, 227, 227),
         child: Container(
@@ -142,13 +110,13 @@ Building> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ListTile(
-                      title: Text(data.name),
+                      title: Text('Name: ${data.name}',style:TextStyle(fontStyle: FontStyle.italic) ,),
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(data.number),
-                          Text(data.age),
-                          Text(data.jobcategories),
+                          Text('MOB: ${data.number}'),
+                          Text('Age: ${data.age}'),
+                          Text( 'Job:${data.jobcategories}'),
                         ],
                       ),
                     ),
@@ -158,59 +126,67 @@ Building> {
               Column(
                 children: [
                   IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => editScreen(
-                          index: index,
-                          name: data.name,
-                          number: data.number,
-                          age: data.age,
-                          jobCategory: data.jobcategories ,
-                          image: data.image!,
-                        ),
-                       ),
-                      );
+                    onPressed: () { 
+                      showModalBottomSheet(context: context, builder: (context) {
+                        return EditScreen(name: data.name, number:data. number, age:data.age, jobCategory:data. jobcategories, index: index, image:data.image!, jobCategories: '',);
+                      },);
                     },
                     icon: Icon(Icons.edit),
                     color: Color.fromARGB(255, 0, 0, 0),
                   ),
                   IconButton(
                     onPressed: () {
-                      deletestud(index);
-                    },
+                      showDialog(context: context,
+                       builder:(context) {
+                         return AlertDialog(
+                          title: Text('Are you sure want to delete'),
+                          actions: [
+                            TextButton(onPressed: (){
+                              Navigator.pop(context);
+                            }, child:Text('close')),
+                            TextButton(onPressed: (){
+                             Provider.of<Dbprovider>(context,listen: false).deletestud(index);
+                              Navigator.pop(context);
+                            }, child: Text('Delete'))
+                          ],
+                         );
+                       },);
+                     },
                     icon: Icon(Icons.delete),
                     color: Colors.red,
-                  ),
-                ],
-              ),
-            ],
+                     ),
+                   ],
+                 ),
+               ],
+             ),
           ),
         ),
       ),
     );
   }
-
   Widget buildStudentList() {
-    return ValueListenableBuilder(
-      valueListenable: jobworkernotifier,
-      builder: (BuildContext ctx, List<Jobworkers> wlist, Widget? child) {
-        final filteredBreakfastList = wlist
-            .where((food) =>
-                food.jobcategories.contains('BuildingWork') == true)
-            .toList();
-        return ListView.separated(
-          itemBuilder: (ctx, index) {
-            final data = filteredBreakfastList[index];
-            return buildStudentCard(data, index);
-          },
-          separatorBuilder: (ctx, index) {
-            return const Divider();
-          },
-          itemCount: filteredBreakfastList.length,
-        );
+ 
+   return
+    Consumer<Dbprovider>(
+  builder: (context, dbvalue, child) {
+    final filteredWorkerList = dbvalue.workersList
+        .where((worker) => worker.jobcategories.contains('BuildingWork'))
+        .toList();
+    
+    Provider.of<Workerdetail>(context).filteredworkerList = List.from(filteredWorkerList);
+
+    return ListView.separated(
+      itemBuilder: (ctx, index) {
+        final data = filteredWorkerList[index];
+        return buildStudentCard(data, index); // Assuming you have a function called buildWorkerCard to build each worker card.
       },
+      separatorBuilder: (ctx, index) {
+        return const Divider();
+      },
+      itemCount: filteredWorkerList.length,
     );
+  },
+);
+
   }
 }

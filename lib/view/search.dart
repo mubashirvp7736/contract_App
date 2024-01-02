@@ -1,40 +1,76 @@
-
 import 'dart:io';
+
 import 'package:contracterApp/controller/db_provider.dart';
-import 'package:contracterApp/controller/tabview.dart';
+import 'package:contracterApp/controller/searchprovider.dart';
 import 'package:contracterApp/db/model/model.dart';
-import 'package:contracterApp/controller/Workerde.dart';
 import 'package:contracterApp/view/details.dart';
 import 'package:contracterApp/view/edit.dart';
+import 'package:contracterApp/view/workersDetails.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
-class ListWorkers extends StatefulWidget {
-  final String? selectedJobCategory;
-  const ListWorkers({Key? key, this.selectedJobCategory}) : super(key: key);
-  @override
-  // ignore: library_private_types_in_public_api
-  _ListStudentState createState() => _ListStudentState();
-}
+class Searchworker extends StatelessWidget {
+  const Searchworker({Key? key}) : super(key: key);
 
-class _ListStudentState extends State<ListWorkers> {
-  String ? image;
-  @override
-  void initState() {
-    super.initState(); 
-    Provider.of<Dbprovider>(context,listen: false).getAllStud();
-    
-  }
-  
   @override
   Widget build(BuildContext context) {
+    final searchProvider = Provider.of<SearchProvider>(context, listen: true);
+
     return Scaffold(
-        body: buildStudentList(),
-     backgroundColor: const Color.fromARGB(255, 148, 148, 148),
-      );
+      
+      appBar: AppBar(title: Text('searchbar'),),
+      body: Container(
+        decoration: const BoxDecoration(
+          
+        ),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
+              child: TextFormField(
+                onChanged: (value) => searchProvider.filter(value, context),
+                decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.all(10),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide: const BorderSide(
+                      color: Color.fromARGB(255, 16, 105, 140),
+                      width: 2.0,
+                    ),
+                  ),
+                  suffixIcon: const Icon(
+                    Icons.search_sharp,
+                    color: Color.fromARGB(255, 16, 105, 140),
+                  ),
+                  hintText: "Find Appointment...",
+                  hintStyle: const TextStyle(
+                    color: Color(0xFF636262),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Expanded(
+              child: searchProvider.searchedPatient.isEmpty
+                  ? Center(
+                      child:
+                          Lottie.asset("assets/Animation - 1704185716916.json"),
+                    )
+                  : ListView.builder(
+                      itemCount: searchProvider.searchedPatient.length,
+                      itemBuilder: (context, index) {
+                        final data = searchProvider.searchedPatient[index];
+                        return buildStudentCard(data, index,context);
+                      },
+                    ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
-  
-Widget buildStudentCard(Jobworkers data, int index) {
+  Widget buildStudentCard(Jobworkers data, int index,context) {
   return GestureDetector(
     onTap: () {
        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
@@ -113,23 +149,6 @@ Widget buildStudentCard(Jobworkers data, int index) {
           ),
         ),
       ),
-    );
-  }
-   Widget buildStudentList() {
-    return Consumer2<Dbprovider,Workerdetail>(
-      builder: (context, dbvalue, mirror, child)  {
-        mirror.filteredworkerList = List.from(mirror.workersList); 
-        return ListView.separated(
-          itemBuilder: (ctx, index) {
-            final data = dbvalue.workersList[index];
-            return buildStudentCard(data, index);
-          },
-          separatorBuilder: (ctx, index) {
-            return const Divider();
-          },
-          itemCount:dbvalue.workersList.length,
-        );
-      },
     );
   }
 }

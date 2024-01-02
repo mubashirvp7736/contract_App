@@ -1,6 +1,7 @@
 
-import 'package:contracterApp/db/function/functions.dart';
+import 'package:contracterApp/controller/db_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Splash extends StatefulWidget {
   
@@ -13,8 +14,8 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> {
   @override
   void initState() {
-  gotoScreen(context);
- checkuserlogin(context);
+  Provider.of<Dbprovider>(context,listen: false).gotoScreen(context);
+  Provider.of<Dbprovider>(context,listen: false). checkuserlogin(context);
     super.initState();
   }
   Widget build(BuildContext context) {
