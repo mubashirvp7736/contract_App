@@ -194,13 +194,12 @@
 // // }
 // }
 import 'package:contracterApp/controller/addProvider.dart';
-import 'package:contracterApp/controller/Workerde.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
-class addstuds extends StatelessWidget {
+class Addstuds extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -222,6 +221,7 @@ class addstuds extends StatelessWidget {
                             .pickImage(ImageSource.gallery),
                     child: CircleAvatar(
                       backgroundColor: Colors.orange[200],
+                      // ignore: sort_child_properties_last
                       child: Provider.of<Addworkers>(context).pickedImage ==
                               null
                           ? Icon(Icons.add_a_photo)

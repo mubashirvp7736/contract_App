@@ -8,10 +8,10 @@ class TabPage extends StatelessWidget {
   List<String> jobCategories = ['CementWork', 'BuildingWork', 'SocialWork', 'Painting'];
 
   List categor = [
-    Cement(),
-    Building(),
-    Social(),
-    Painting(),
+    const Cement(),
+    const Building(),
+    const Social(),
+    const Painting(),
   ];
 
   @override
@@ -21,7 +21,7 @@ class TabPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 8.0,
             mainAxisSpacing: 8.0,
@@ -46,7 +46,7 @@ class TabPage extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 70),
                   child: Column(
                     children: [
-                      Text(jobCategories[index], style: TextStyle(fontSize: 20,fontStyle:FontStyle.italic,color: Colors.black)),
+                      Text(jobCategories[index], style: const TextStyle(fontSize: 20,fontStyle:FontStyle.italic,color: Colors.black)),
                     ],
                   ),
                 ),
