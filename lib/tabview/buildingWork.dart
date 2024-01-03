@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:contracterApp/controller/db_provider.dart';
 import 'package:contracterApp/controller/Workerde.dart';
 import 'package:contracterApp/db/model/model.dart';
-import 'package:contracterApp/controller/tabview.dart';
 import 'package:contracterApp/view/details.dart';
 import 'package:contracterApp/view/edit.dart';
+import 'package:contracterApp/view/search.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -30,59 +30,20 @@ class _ListStudentState extends State<Building> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.white24,
-           title: Provider.of<Tabviewdetail>(context,listen: false).isSearching ? buildSearchField() : Text("workers List"),
-          automaticallyImplyLeading: false,
+          backgroundColor: Colors.grey[700],
+          title: Text('BuildWorkers'),
+          centerTitle: true,
           actions: [
-            IconButton(
-              onPressed: () {
-                Provider.of<Tabviewdetail>(context,listen: false).serachh();
-              },
-              icon: Icon(Provider.of<Tabviewdetail>(context).isSearching ? Icons.cancel : Icons.search),
-            ),
+            IconButton(onPressed: (){
+              
+         Navigator.push(context,MaterialPageRoute(builder:(context) =>  Searchworker()));  
+            }, icon: Icon(Icons.search,color: Colors.white,))
           ],
-        ),
-        body: Center(
-          child: Provider.of<Tabviewdetail>(context,listen: false).isSearching 
-                          ?Provider.of<Tabviewdetail>(context).filteredworkerList.isNotEmpty
-                        ? ListView.separated(
-                      itemBuilder: (ctx, index) {
-                        final data = Provider.of<Tabviewdetail>(context,listen: false).filteredworkerList[index];
-                        return buildStudentCard(data, index);
-                      },
-                      separatorBuilder: (ctx, index) {
-                        return const Divider();
-                      },
-                      itemCount:Provider.of<Tabviewdetail>(context,listen: false).filteredworkerList.length,
-                    )
-                  : Center(
-                      child: Text("No results found."),
-                    )
-              : buildStudentList(),
-        ),
-        backgroundColor: const Color.fromARGB(255, 148, 148, 148),
-      ),
-    );
-  }
-  Widget buildSearchField() {
-    return TextField(
-      controller:Provider.of<Tabviewdetail>(context,listen: false).searchController,
-      onChanged: (query) {
-        Provider.of<Tabviewdetail>(context,listen: false).filterworkers(query);
-      },
-      autofocus: true,
-      style: TextStyle(
-        color: Colors.white, 
-      ),
-      decoration: InputDecoration(
-        hintText: "Search students...",
-        hintStyle: TextStyle(
-          color: Colors.white.withOpacity(0.7), 
-        ),
-        border: InputBorder.none,
-      ),
-    );
-  }
+  ),
+    body: buildStudentList(),
+  ));}
+   
+ 
 Widget buildStudentCard(Jobworkers data, int index) {
   return GestureDetector(
     onTap: () {
@@ -178,8 +139,7 @@ Widget buildStudentCard(Jobworkers data, int index) {
     return ListView.separated(
       itemBuilder: (ctx, index) {
         final data = filteredWorkerList[index];
-        return buildStudentCard(data, index); // Assuming you have a function called buildWorkerCard to build each worker card.
-      },
+        return buildStudentCard(data, index); },
       separatorBuilder: (ctx, index) {
         return const Divider();
       },

@@ -1,8 +1,5 @@
 import 'dart:io';
-
-import 'package:contracterApp/controller/db_provider.dart';
 import 'package:contracterApp/view/drawer.dart';
-import 'package:contracterApp/view/edit.dart';
 import 'package:flutter/material.dart';
 import 'package:contracterApp/db/second_function/function2.dart';
 
@@ -15,7 +12,7 @@ class ScreenDrawer extends StatelessWidget {
 
     return Drawer(
       child: Scaffold(
-        backgroundColor: Colors.brown[100],
+        backgroundColor: Colors.black12,
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: Colors.blueGrey,
@@ -28,11 +25,12 @@ class ScreenDrawer extends StatelessWidget {
             return value.isEmpty ? Container(
               height: 60,
               width: 180,
-              color: Colors.lightGreenAccent[100],
+            //  color: Colors.grey,
+              decoration: const BoxDecoration(shape: BoxShape.circle,color: Colors.black,),
               margin: EdgeInsets.only(top: 220,left: 60),
               child: TextButton(onPressed: (){
                Navigator.push(context, MaterialPageRoute(builder: ((context) =>details() )));
-              }, child: Text('ADD ACCOUNT')),
+              }, child: Icon(Icons.add,size: 40,)),
             ):
            ListView.builder(
             itemCount: 1,
